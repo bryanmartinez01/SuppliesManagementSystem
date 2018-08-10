@@ -1,0 +1,67 @@
+div#usrDetails{
+	background-color: #e3ffc0;
+	border-radius: 15px;
+	width: 500px;
+	vertical-align: middle;
+}
+
+h3{
+	font-size: 16px;
+	font-family: Helvetica;
+}
+
+label {
+	width: 100px;
+	text-align: center;
+	float: left;
+	font-size: 12px;
+	font-family: Arial;
+}
+
+th {
+	text-align: center;
+	font-size: 10px;
+	font-family: Helvetica;
+}
+
+td {
+	text-align: center;
+	font-size: 10px;
+	font-family: Arial;
+}
+
+div#tableDiv{
+	width:1650px; 
+	margin:2px 0px 0px 2px;
+	border: 1px solid gray;
+}
+
+input{
+	font-size: 10px;
+	font-family: Arial;
+}
+
+
+select{
+	font-size: 10px;
+	font-family: Arial;
+}
+
+option{
+	font-size: 10px;
+	font-family: Arial;
+}
+
+.hover{
+	background: #a3ffe2;	
+}
+
+
+.highlighted{
+	background: #fce5ff;
+}
+
+
+.hidden{
+	visibility: hidden;
+}

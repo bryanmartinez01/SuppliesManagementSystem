@@ -8,6 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>User Maintenance - Admin</title>
 <link rel="stylesheet" href="css/style.css" type="text/css">
+
 <script src="./js/prototype.js"></script>
 <script>
 	var contextPath = "${pageContext.request.contextPath}"
@@ -15,7 +16,9 @@
 </head>
 <body>
 
-	<div id="mainContents">
+	<div id="userMainContents">
+		<div id="usrDetails">
+		<h3>&nbsp;&nbsp;&nbsp;User Maintenance - Admin</h3>
 		<table>
 			<tr>
 				<td><label>User ID: </label></td>
@@ -46,8 +49,6 @@
 				<td><label>Email: </label></td>
 				<td><input type="text" id="txtEmail"></td>
 			</tr>
-		</table>
-			<table>
 				<tr>
 					<td><label>Active Tag: </label></td>
 					<td><input name="radioActiveTag" id="radioActiveTagY"
@@ -78,7 +79,7 @@
 					<td colspan=2 id=searchResult><label id="noResults"></label></td>
 				</tr>
 			</table>
-
+			</div>
 			<!-- Results Table -->
 			<table id="tableDiv">
 				<tr>
@@ -195,7 +196,7 @@
 		new Ajax.Request(contextPath, {
 			method : "POST",
 			onComplete : function(response) {
-				$("mainContents").update(response.responseText);
+				$("userMainContents").update(response.responseText);
 			}
 		});
 	}
@@ -441,8 +442,7 @@
 				userId : $F("txtUserId")
 			},
 			onComplete : function(response) {
-				alert(response.responseText);
-				$("mainContents").update(response.responseText);
+				$("userMainContents").update(response.responseText);
 			}
 		}); 
 	}
@@ -455,7 +455,7 @@
 				userId : $F("searchTxt")
 			},
 			onComplete : function(response) {
-				$("mainContents").update(response.responseText);
+				$("userMainContents").update(response.responseText);
 			}
 		});
 	}

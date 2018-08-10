@@ -8,14 +8,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>User Maintenance - User</title>
 <link rel="stylesheet" href="css/style.css" type="text/css">
-<script src="./js/prototype.js"></script>
+<script src="js/prototype.js"></script>
 <script>
 	var contextPath = "${pageContext.request.contextPath}"
 </script>
 </head>
 <body>
-
-	<div id="mainContents">
+	<div id="userMainContents">
+	<div id="usrDetails">
+	<h3>&nbsp;&nbsp;&nbsp;User Maintenance - User</h3>
 		<table>
 			<tr>
 				<td><label>User ID: </label></td>
@@ -46,6 +47,7 @@
 				<td><input type="hidden" id="lastUserTxt" value="${currentUserId}"></td>
 			</tr>
 		</table>
+		</div>
 	</div>
 </body>
 
@@ -57,7 +59,6 @@
 	var hasKeyword = false;
 	var keywordIdx = 0;
 	
-	$("lastUserTxt").value = "Admin"
 
 	$("changePwBtn").observe("click", function() {
 		changePassword();
@@ -108,14 +109,6 @@
 				lastUser : $F("lastUserTxt")
 			},
 			onComplete : function(response) {
-				$("txtUserId").value = "";
-				$("txtFirstName").value = "";
-				$("txtLastName").value = "";
-				$("txtMI").value = "";
-				$("txtEmail").value = "";
-				$("radioActiveTagY").writeAttribute("checked", "checked");
-				$("optAccessLevel").value = "";
-				$("lastUserTxt").value = "";
 				alert("Record Updated!");
 				window.location.reload();
 			}
@@ -126,7 +119,7 @@
 		new Ajax.Request(contextPath, {
 			method : "POST",
 			onComplete : function(response) {
-				$("mainContents").update(response.responseText);
+				$("userMainContents").update(response.responseText);
 			}
 		});
 	}
@@ -138,7 +131,7 @@
 				userId : $F("txtUserId")
 			},
 			onComplete : function(response) {
-				$("mainContents").update(response.responseText);
+				$("userMainContents").update(response.responseText);
 			}
 		});
 	}
