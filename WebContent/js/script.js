@@ -21,7 +21,11 @@ function updateSuppliesStocksRecord(){
 		return false;
 	}
 	
-	if(checkdate($F("txtDateAdded")) == false || checkdate($F("txtPurchaseDate")) == false) {
+	if(checkdate($F("txtPurchaseDate")) == false) {
+		return false;
+	}
+	
+	if(checkReferenceNo($F("txtReferenceNo")) == false) {
 		return false;
 	}
 
@@ -76,6 +80,14 @@ function checkQuantity(input) {
 	return true;
 }
 
+function checkReferenceNo(input){
+	if (isNaN(parseInt(input)) || input < 1) {
+		alert("Please input a valid ReferenceNo.");
+		return false;
+	}
+	return true;
+}
+
 function addSuppliesStocksRecord(){
 	var isNull=false;
 	
@@ -89,12 +101,16 @@ function addSuppliesStocksRecord(){
 		alert("Fields cannot be null");
 		return false;
 	}
-	
-	if(checkdate($F("txtDateAdded")) == false || checkdate($F("txtPurchaseDate")) == false) {
+
+	if(checkdate($F("txtPurchaseDate")) == false) {
 		return false;
 	}
 	
 	if(checkQuantity($F("txtQuantity")) == false) {
+		return false;
+	}
+	
+	if(checkReferenceNo($F("txtReferenceNo")) == false) {
 		return false;
 	}
 	
@@ -104,6 +120,8 @@ function addSuppliesStocksRecord(){
 	addObj.purchaseDate = $F("txtPurchaseDate");
 	addObj.referenceNo = $F("txtReferenceNo");
 	addObj.quantity = $F("txtQuantity");
+	
+	saveSuppliesStocksRecord();
 	
 	$("txtQuantity").value = "";
 	$("txtReferenceNo").value = "";
