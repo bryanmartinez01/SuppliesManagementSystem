@@ -16,6 +16,12 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.sms.service.UserService;
 
 public class UserServlet extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -261045241338730938L;
+
+	@SuppressWarnings("resource")
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		String page = "";
 		try{
@@ -41,6 +47,7 @@ public class UserServlet extends HttpServlet {
 		}
 	}
 	
+	@SuppressWarnings("resource")
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		
 		ApplicationContext applicationContext = 
@@ -64,7 +71,14 @@ public class UserServlet extends HttpServlet {
 			}else if("updateThisUser".equals(action)){
 				userService.updateThisUser(req);
 			}
-			page = "pages/AdminUserMaintenance.jsp";
+			
+			userService.getUser(req);
+			HttpSession session = req.getSession();
+			if (session.getAttribute("currentAccessLevel").equals("A")) {
+				page = "pages/AdminUserMaintenance.jsp";
+			} else {
+				page = "pages/UserUserMaintenance.jsp";
+			}
 		} catch(SQLException e){
 			System.out.println(e.getMessage());
 		} finally{

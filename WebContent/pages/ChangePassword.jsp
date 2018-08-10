@@ -7,8 +7,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Change Password</title>
-<link rel="stylesheet" href="../css/style.css" type="text/css">
-<script src="../js/prototype.js"></script>
+<link rel="stylesheet" href="css/style.css" type="text/css">
+<link rel="stylesheet" href="Bootstrap-3.3.7/css/bootstrap.min.css" type="text/css">
+<script src="js/prototype.js"></script>
+<script src="Bootstrap-3.3.7/js/bootstrap.js"></script>
 <script>
 	var contextPath = "${pageContext.request.contextPath}"
 </script>
@@ -32,7 +34,7 @@
 			<tr>
 				<td>
 
-				<input type="text" id="txtUserId" value="${uid}">
+				<input type="hidden" id="txtUserId" value="${uid}">
 				</td>
 			</tr>
 			<tr>
@@ -54,7 +56,7 @@
 			<tr>
 				<td>&nbsp;</td>
 				<td><input type="button" id="updatePassBtn" value="Save">
-				<a href=${page} }>Cancel</a></td>
+				<a href="${page}">Cancel</a></td>
 			</tr>
 		</table>
 	</div>
