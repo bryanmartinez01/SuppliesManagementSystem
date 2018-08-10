@@ -19,12 +19,12 @@
   <!-- Mel -->
   <servlet>
   	<servlet-name>suppliesStocks</servlet-name>
-  	<servlet-class>com.sms.servlet.Servlet</servlet-class>
+  	<servlet-class>com.sms.servlet.StockController</servlet-class>
   </servlet>
   
   <servlet-mapping>
   	<servlet-name>suppliesStocks</servlet-name>
-  	<url-pattern>/suppliesStocks</url-pattern>
+  	<url-pattern>/addStocks</url-pattern>
   </servlet-mapping>
   
   <servlet-mapping>

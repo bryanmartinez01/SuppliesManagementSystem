@@ -16,12 +16,36 @@
 		width: 100px;
 		margin: 3px;
 	}
-	a {
+	.link {
 		color: blue;
 		text-decoration: underline;
 		cursor: pointer;
 	}
 	
+	#bottom {
+		display: inline-block;
+	}
+	 
+	#container {
+		padding-left: 10%;
+		padding-right: 10%;
+		padding-bottom: 20px;
+  		display: flex;
+  		flex-flow: row nowrap;
+  		justify-content: space-between;
+	}
+	
+	#stocksTable {
+		margin-top: 20px;
+		border-collapse: collapse;
+	}
+	
+	#stocksTable td, th {
+		padding: 5px;
+		width: 200px;
+		border: 1px solid gray;
+		text-align: center;
+	}
 </style>
 <script src="js/prototype.js"></script>
 <script>
@@ -31,43 +55,44 @@
 <body>
 <div id="mainContents">
 <h3>Stocks</h3>
-	<div style="width: 60%; float: left; padding-bottom: 20px;">
-	<table>
-		<tr>
-			<td>Item Name</td>
-			<td><select id="itemName" disabled>
-				<c:forEach var="item" items="${suppliesItemList}">
-					<option value="${item.supplyId}"><c:out value="${item.itemName}"/></option>
-				</c:forEach>
-				</select></td>
-		</tr>
-		<tr>
-			<td>Quantity</td>
-			<td><input type="text" name="txtQuantity" id="txtQuantity" disabled></td>
-		</tr>
-		<tr>
-			<td>Reference No.</td>
-			<td><input type="text" name="txtReferenceNo" id="txtReferenceNo" disabled></td>
-		</tr>
-		<tr>
-			<td>Date Added</td>
-			<td><input type="text" name="txtDateAdded" id="txtDateAdded" disabled></td>
-		</tr>
-		<tr>
-			<td>Purchase Date</td>
-			<td><input type="text" name="txtPurchaseDate" id="txtPurchaseDate" disabled></td>
-		</tr>
-	</table>
+	<div id="container">
+		<div id="left">
+		<table>
+			<tr>
+				<td>Item Name</td>
+				<td><select id="itemName" disabled>
+					<c:forEach var="item" items="${suppliesItemList}">
+						<option value="${item.supplyId}"><c:out value="${item.itemName}"/></option>
+					</c:forEach>
+					</select></td>
+			</tr>
+			<tr>
+				<td>Quantity</td>
+				<td><input type="text" name="txtQuantity" id="txtQuantity" disabled></td>
+			</tr>
+			<tr>
+				<td>Reference No.</td>
+				<td><input type="text" name="txtReferenceNo" id="txtReferenceNo" disabled></td>
+			</tr>
+			<tr>
+				<td>Date Added</td>
+				<td><input type="text" name="txtDateAdded" id="txtDateAdded" disabled></td>
+			</tr>
+			<tr>
+				<td>Purchase Date<br> <sub>(mm/dd/yyyy):</sub></td>
+				<td><input type="text" name="txtPurchaseDate" id="txtPurchaseDate" disabled></td>
+			</tr>
+		</table>
+		</div>
+		<div id="right">
+			<input type="button" id="addBtn" value="Add Stocks"><br>
+			<input type="button" id="cancelBtn" value="Cancel"><br>
+		</div>
 	</div>
-	<div style="width: 30%; float: right">
-		<input type="button" id="addBtn" value="Add Stocks"><br>
-		<input type="button" id="cancelBtn" value="Cancel"><br>
-	</div>
-	<br>
-	<div id="stocksTable" style="float: left; margin-top: 20px;">
+	<div id="bottom">
 		<input type="text" name="txtSearch" id="txtSearch">
 		<input type="button" id="searchBtn" value="Search">
-		<table border="1" style="margin-top: 10px">
+		<table id="stocksTable">
 			<tr>
 				<th>Stock ID</th>
 				<th>Item Name</th>
@@ -85,17 +110,17 @@
 			</tr>
 			</c:if>
 			<c:forEach var="stocks" items="${stocksList}">
-			<tr class="tablerow">
-				<td><a class="link"><c:out value="${stocks.stockId}"/></a></td>
-				<td><c:out value="${stocks.itemName}"/></td>
-				<td style="display: none;"><c:out value="${stocks.supplyId}"/></td>
-				<td><c:out value="${stocks.quantity}"/></td>
-				<td><c:out value="${stocks.referenceNo}"/></td>
-				<td><fmt:formatDate pattern="M/dd/yyyy" value="${stocks.dateAdded}"/></td>
-				<td><fmt:formatDate pattern="M/dd/yyyy" value="${stocks.purchaseDate}"/></td>
-				<td><c:out value="${stocks.lastUser}"/></td>
-				<td><fmt:formatDate pattern="M/dd/yyyy" value="${stocks.lastUpdate}"/></td>
-			</tr>
+				<tr class="tablerow">
+					<td><a class="link"><c:out value="${stocks.stockId}"/></a></td>
+					<td><c:out value="${stocks.itemName}"/></td>
+					<td style="display: none;"><c:out value="${stocks.supplyId}"/></td>
+					<td><c:out value="${stocks.quantity}"/></td>
+					<td><c:out value="${stocks.referenceNo}"/></td>
+					<td><fmt:formatDate pattern="M/dd/yyyy" value="${stocks.dateAdded}"/></td>
+					<td><fmt:formatDate pattern="M/dd/yyyy" value="${stocks.purchaseDate}"/></td>
+					<td><c:out value="${stocks.lastUser}"/></td>
+					<td><fmt:formatDate pattern="M/dd/yyyy" value="${stocks.lastUpdate}"/></td>
+				</tr>
 			</c:forEach>
 		</table>
 	</div>
@@ -128,7 +153,7 @@
 		cancelSuppliesStocksRecord();
 	});
 	
-	Event.observe(window, "load", function() {
+	Event.observe(this, "load", function() {
 		$("itemName").value = "";
 		$("txtQuantity").value = "";
 		$("txtReferenceNo").value = "";
@@ -137,8 +162,11 @@
 		$("txtSearch").value = "";
 	});
 	
+var flag = false;
+
 	$$(".tablerow").forEach(function(param) {
 		param.down('a' ,0).observe("click", function() {
+			flag = true;
 			action = "UpdateRecord";
 			 new Ajax.Request(contextPath + "/nextPage", {
 					method: "POST",
@@ -158,11 +186,13 @@
 		});
 
 		param.observe("click", function() {
-			$("itemName").value = param.down('td', 2).innerHTML;
-			$("txtQuantity").value = param.down('td', 3).innerHTML;
-			$("txtReferenceNo").value = param.down('td', 4).innerHTML;
-			$("txtDateAdded").value = param.down('td', 5).innerHTML;
-			$("txtPurchaseDate").value = param.down('td', 6).innerHTML;
+			if(flag == false) {
+				$("itemName").value = param.down('td', 2).innerHTML;
+				$("txtQuantity").value = param.down('td', 3).innerHTML;
+				$("txtReferenceNo").value = param.down('td', 4).innerHTML;
+				$("txtDateAdded").value = param.down('td', 5).innerHTML;
+				$("txtPurchaseDate").value = param.down('td', 6).innerHTML;
+			}
 		});
 	});
 	

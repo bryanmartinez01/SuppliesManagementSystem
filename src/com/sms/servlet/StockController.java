@@ -15,7 +15,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.sms.entity.SuppliesStock;
 import com.sms.service.SuppliesStocksService;
 
-public class Servlet extends HttpServlet {
+public class StockController extends HttpServlet {
 
 	/**
 	 * 
@@ -54,7 +54,7 @@ public class Servlet extends HttpServlet {
 
 		try{
 			if("insertRecord".equals(action)){
-				page = "pages/supplies_stocks_update.jsp";
+				page = "pages/supplies_stocks_add.jsp";
 				suppliesStocksService.insertSuppliesStocks(request);
 			}else if("updateRecord".equals(action)){
 				suppliesStocksService.updateSuppliesStocks(request);
@@ -62,7 +62,7 @@ public class Servlet extends HttpServlet {
 				suppliesStocksService.getSuppliesItemList(request);
 				suppliesStocksService.searchSuppliesStocks(request);
 			}else if("displayNextPage".equals(action)) {
-				page = "pages/supplies_stocks_update.jsp";
+				page = "pages/supplies_stocks_add.jsp";
 				suppliesStocksService.getSuppliesItemList(request);
 				suppliesStocksService.getSuppliesStocks(request);
 				suppliesStocksService.getSuppliesStockItem(request);

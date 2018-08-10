@@ -24,47 +24,49 @@
 </head>
 <body>
 <h3>Stocks</h3>
-<div style="width: 60%; float: left; padding-bottom: 20px;">
-<input type="hidden" id="selectedSupplyId" value="${selectedSupplyId}">
-<input type="hidden" id="stockId" value="${stockId}">
-	<table>
-		<tr>
-			<td>Item Name</td>
-			<td><select id="itemName">
-				<c:forEach var="item" items="${suppliesItemList}">
-					<option value="${item.supplyId}"><c:out value="${item.itemName}"/></option>
-				</c:forEach>
-				</select></td>
-		</tr>
-		<tr>
-			<td>Quantity</td>
-			<td><input type="text" name="txtQuantity" id="txtQuantity" value="${quantity}"></td>
-		</tr>
-		<tr>
-			<td>Reference No.</td>
-			<td><input type="text" name="txtReferenceNo" id="txtReferenceNo" value="${referenceNo}"></td>
-		</tr>
-		<tr>
-			<td>Date Added</td>
-			<td><input type="text" name="txtDateAdded" id="txtDateAdded" value="${dateAdded}" disabled></td>
-		</tr>
-		<tr>
-			<td>Purchase Date</td>
-			<td><input type="text" name="txtPurchaseDate" id="txtPurchaseDate" value="${purchaseDate}"></td>
-		</tr>
-	</table>
+<div id="container">
+	<div id="left">
+		<input type="hidden" id="stockId" value="${stockId}">
+		<table>
+			<tr>
+				<td>Item Name</td>
+				<td><select id="itemName">
+					<c:forEach var="item" items="${suppliesItemList}">
+						<option value="${item.supplyId}" <c:if test="${selectedSupplyId == item.supplyId}"><c:out value="selected"/></c:if>>
+							<c:out value="${item.itemName}"/></option>
+					</c:forEach>
+					</select></td>
+			</tr>
+			<tr>
+				<td>Quantity</td>
+				<td><input type="text" name="txtQuantity" id="txtQuantity" value="${quantity}"></td>
+			</tr>
+			<tr>
+				<td>Reference No.</td>
+				<td><input type="text" name="txtReferenceNo" id="txtReferenceNo" value="${referenceNo}"></td>
+			</tr>
+			<tr>
+				<td>Date Added</td>
+				<td><input type="text" name="txtDateAdded" id="txtDateAdded" value="${dateAdded}" disabled></td>
+			</tr>
+			<tr>
+				<td>Purchase Date<br> <sub>(mm/dd/yyyy):</sub></td>
+				<td><input type="text" name="txtPurchaseDate" id="txtPurchaseDate" value="${purchaseDate}"></td>
+			</tr>
+		</table>
 	</div>
-<div style="width: 30%; float: right">
-	<input type="button" id="saveBtn" value="Save"><br>
-	<input type="button" id="cancelBtn" value="Cancel"><br>
+	<div id="right">
+		<input type="button" id="saveBtn" value="Save"><br>
+		<input type="button" id="cancelBtn" value="Cancel"><br>
+	</div>
 </div>
 </body>
 <script>
-	$("itemName").value = $F("selectedSupplyId");
 	$("txtDateAdded").value = $F("txtDateAdded") == ""? mm + "/" + dd + "/" + yyyy : $F("txtDateAdded");
-	
+
 	if(action == "UpdateRecord") {
 		$("txtQuantity").disable();
+		$("itemName").disable();
 	}
 	
 	$("cancelBtn").observe("click", function() {
@@ -76,7 +78,6 @@
 			updateSuppliesStocksRecord();
 		} else if(action == "AddRecord") {
 		 	addSuppliesStocksRecord(); 
-		 	saveSuppliesStocksRecord();
 		}
 	});
 
