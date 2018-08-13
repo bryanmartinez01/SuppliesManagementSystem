@@ -10,23 +10,27 @@ var yyyy = d.getFullYear();
 function updateSuppliesStocksRecord(){
 	var isNull=false;
 	
-	$w("itemName txtQuantity txtReferenceNo txtDateAdded txtPurchaseDate").each(function(c){
+	$w("itemName txtQuantity txtDateAdded").each(function(c){
 		if ($F(c) == null || $F(c) == ""){
 			isNull = true;
 		}
 	})
 	
 	if(isNull){
-		alert("Fields cannot be null");
+		alert("Quantity cannot be null.");
 		return false;
 	}
 	
-	if(checkdate($F("txtPurchaseDate")) == false) {
-		return false;
+	if($F("txtPurchaseDate") != "" && $F("txtPurchaseDate") != null) {
+		if(checkdate($F("txtPurchaseDate")) == false) {
+			return false;
+		}
 	}
 	
-	if(checkReferenceNo($F("txtReferenceNo")) == false) {
-		return false;
+	if($F("txtReferenceNo") != "" && $F("txtReferenceNo") != null) {
+		if(checkReferenceNo($F("txtReferenceNo")) == false) {
+			return false;	
+		}
 	}
 
 	updateObj.stockId = $F("stockId");
@@ -91,27 +95,31 @@ function checkReferenceNo(input){
 function addSuppliesStocksRecord(){
 	var isNull=false;
 	
-	$w("itemName txtQuantity txtReferenceNo txtDateAdded txtPurchaseDate").each(function(c){
+	$w("itemName txtQuantity txtDateAdded").each(function(c){
 		if ($F(c) == null || $F(c) == ""){
 			isNull = true;
 		}
 	})
 	
 	if(isNull){
-		alert("Fields cannot be null");
+		alert("Quantity cannot be null");
 		return false;
 	}
 
-	if(checkdate($F("txtPurchaseDate")) == false) {
-		return false;
+	if($F("txtPurchaseDate") != "" && $F("txtPurchaseDate") != null) {
+		if(checkdate($F("txtPurchaseDate")) == false) {
+			return false;
+		}
 	}
 	
 	if(checkQuantity($F("txtQuantity")) == false) {
 		return false;
 	}
 	
-	if(checkReferenceNo($F("txtReferenceNo")) == false) {
-		return false;
+	if($F("txtReferenceNo") != "" && $F("txtReferenceNo") != null) {
+		if(checkReferenceNo($F("txtReferenceNo")) == false) {
+			return false;	
+		}
 	}
 	
 	addObj.supplyId = $F("itemName");
