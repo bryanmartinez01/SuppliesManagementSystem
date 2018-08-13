@@ -1,5 +1,10 @@
 <footer>
-	<h4  style="color: maroon;">Footer lang</h4>
+<link rel="stylesheet" href="../css/style.css" type="text/css">
+	<div id=borderDesign></div>
+	<div id="footerContainer">
+		<br>Computer Professionals Inc. 2018 &copy;
+		<br>Group 2
+	</div>
 </footer>
 <script>
 	$('logoutBtn').observe('click', function(){

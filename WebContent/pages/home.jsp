@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Home</title>
-
+<link rel="stylesheet" href="../css/style.css" type="text/css">
 <script type="text/javascript" src="../js/prototype.js"></script>
 <script>
 	var contextPath = "${pageContext.request.contextPath}";
@@ -30,14 +30,15 @@
 
 <jsp:include page="header.jsp" />
 <body>
-	<h3><c:out value="Hello ${currentUserFN}!" /></h3>
-
+	<div id=body>
 	<c:if test="${currentAccessLevel == 'U'}">
 		<script>
 			$('maintenance').hide();
 			$('reports').hide();
 		</script>
-	</c:if>	
+	</c:if>
+
+	</div>
 </body>
 <jsp:include page="footer.jsp"></jsp:include>
 </html>

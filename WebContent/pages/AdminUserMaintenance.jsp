@@ -287,10 +287,11 @@
 				})
 		if (isNull) {
 			alert("Fields cannot be null");
+			clearFields();
 			return false;
 		}
 
-		addObj.userId = $F("txtUserId");
+		addObj.userId =$F("txtUserId").replace(" ", "");
 		addObj.firstName = $F("txtFirstName");
 		addObj.lastName = $F("txtLastName");
 		addObj.middleInitial = $F("txtMI");
@@ -459,5 +460,7 @@
 			}
 		});
 	}
+	
+
 </script>
 </html>

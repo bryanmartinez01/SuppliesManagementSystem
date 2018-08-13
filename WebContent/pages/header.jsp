@@ -1,10 +1,25 @@
 <header>
-	<h2 style="color: gray;">HEADER kasama menu at logout</h2>
+	<link rel="stylesheet" href="../css/style.css" type="text/css">
+	<script type="text/javascript" src="../js/prototype.js"></script>
+	<div id="headerTitle"><h2 style="color: black;">Supplies Management System</h2></div>
+	<div id=borderDesign></div>
 	<ul>
-		<li id="maintenance"><a href="#">Maintenance</a></li>
-		<li id="issueSupplies"><a href="#">Issue Supplies</a></li>
-		<li id="addStocks"><a href="#">Add Stocks</a></li>
-		<li id="reports"><a href="#">Reports</a></li>
+		<li><div id="issueSupplies">Issue Supplies</div></li>
+		<li><div id="addStocks">Add Stocks</div></li>
+		<li class="dropdown" id="maintenance">
+			<div class="dropbtn">Maintenance</div>
+				<div class="dropdown-content">
+					<a id="supplyMaintenance">Supply Maintenance</a>
+					<a id="userMaintenance">User Maintenance</a>
+				</div>
+		</li>
+		<li class="dropdown">
+			<div class="dropbtn">Hi ${currentUserFN}</div>
+				<div class="dropdown-content">
+					<a id="userprofileMaintenance">Update Profile</a>
+					<a id="logoutBtn">Logout</a>
+				</div>
+		</li>
+
 	</ul>
-	<input id="logoutBtn" type="button" style="float: right;" value="Logout"/>
 </header>
