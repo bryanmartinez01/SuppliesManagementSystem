@@ -23,7 +23,7 @@ public class StockController extends HttpServlet {
 	private static final long serialVersionUID = -3254083445269926470L;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		String page = "pages/suppliesStocks.jsp";
+		String page = "pages/suppliesStocksList.jsp";
 		try{
 			ApplicationContext applicationContext = 
 					new ClassPathXmlApplicationContext("/com/sms/resource/applicationContext.xml");
@@ -49,7 +49,7 @@ public class StockController extends HttpServlet {
 		SuppliesStocksService suppliesStocksService = 
 				(SuppliesStocksService) applicationContext.getBean("suppliesStocksService");
 		
-		String page = "pages/suppliesStocks.jsp";
+		String page = "pages/suppliesStocksList.jsp";
 		String action = request.getParameter("action") == null ? "" : request.getParameter("action");
 
 		try{
