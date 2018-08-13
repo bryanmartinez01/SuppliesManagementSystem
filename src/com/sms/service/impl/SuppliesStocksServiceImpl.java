@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.sms.dao.SuppliesStocksDAO;
 import com.sms.entity.SuppliesStock;
@@ -39,12 +40,21 @@ public class SuppliesStocksServiceImpl implements SuppliesStocksService {
 	public void insertSuppliesStocks(HttpServletRequest request) throws SQLException {
 		Map<String, Object> params = new HashMap<>();
 		
+		HttpSession session = request.getSession();
+		
 		params.put("supplyId", request.getParameter("supplyId"));
 		params.put("dateAdded", formatDate(request.getParameter("dateAdded")));
-		params.put("purchaseDate", formatDate(request.getParameter("purchaseDate")));
-		params.put("referenceNo", request.getParameter("referenceNo"));
+		
+		if(request.getParameter("purchaseDate") != null && request.getParameter("purchaseDate") != "") {
+			params.put("purchaseDate", formatDate(request.getParameter("purchaseDate")));
+		}
+		
+		if(request.getParameter("referenceNo") != null && request.getParameter("referenceNo") != "") {
+			params.put("referenceNo", request.getParameter("referenceNo"));
+		}
+		
 		params.put("quantity", request.getParameter("quantity"));
-		params.put("lastUser", "user");
+		params.put("lastUser", session.getAttribute("currentUserId"));
 		
 		this.suppliesStocksDAO.insertSuppliesStocks(params);
 		this.suppliesStocksDAO.updateSupplies(params);
@@ -54,11 +64,17 @@ public class SuppliesStocksServiceImpl implements SuppliesStocksService {
 	public void updateSuppliesStocks(HttpServletRequest request) throws SQLException {
 		Map<String, Object> params = new HashMap<>();
 		
+		HttpSession session = request.getSession();
+		
 		params.put("stockId", request.getParameter("stockId"));
 		params.put("supplyId", request.getParameter("supplyId"));
-		params.put("purchaseDate", formatDate(request.getParameter("purchaseDate")));
-		params.put("referenceNo", request.getParameter("referenceNo"));
-		params.put("lastUser", "user");
+		if(request.getParameter("purchaseDate") != null && request.getParameter("purchaseDate") != "") {
+			params.put("purchaseDate", formatDate(request.getParameter("purchaseDate")));
+		}
+		if(request.getParameter("referenceNo") != null && request.getParameter("referenceNo") != "") {
+			params.put("referenceNo", request.getParameter("referenceNo"));
+		}
+		params.put("lastUser", session.getAttribute("currentUserId"));
 	
 		this.suppliesStocksDAO.updateSuppliesStocks(params);
 	}
