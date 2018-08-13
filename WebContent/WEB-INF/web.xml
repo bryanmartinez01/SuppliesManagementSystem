@@ -15,7 +15,7 @@
   	<url-pattern>/login</url-pattern>
   </servlet-mapping>
   
-  <servlet>
+	<servlet>
 		<servlet-name>suppliesmaintenance</servlet-name>
 		<servlet-class>com.sms.servlet.SuppliesServlet</servlet-class>
 	</servlet>

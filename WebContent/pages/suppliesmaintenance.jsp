@@ -16,20 +16,19 @@
 </head>
 <style>
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
 }
 
-/* Modal Content */
 .modal-content {
     background-color: #fefefe;
     margin: auto;
@@ -38,7 +37,6 @@
     width: 60%;
 }
 
-/* The Close Button */
 .close {
     color: #aaaaaa;
     float: right;
@@ -180,8 +178,8 @@
 		<th>Last Update</th>
 	</tr>
 	<c:forEach var = "supplies" items = "${suppliesList}">
-		<tr id = "${supplies.supplyID}" class = "tablerow">
-		<td><a href = "#"><c:out value="${supplies.supplyID}"/></a></td>
+		<tr id = "${supplies.supplyId}" class = "tablerow">
+		<td><a href = "#"><c:out value="${supplies.supplyId}"/></a></td>
 		<td><c:out value="${supplies.typeName}"/></td>
 		<td><c:out value="${supplies.itemName}"/></td>
 		<td><c:out value="${supplies.itemUnit}"/></td>
@@ -207,17 +205,25 @@
 </div>
 <div class = "col-md-1"></div>
 </div>
+
+
 <div id = "incompleteRequirements" class = "modal">
 	<div class = "modal-content">
-		<span class = "close">&times;</span>
-		<h4 style = "text-align: center;">Required details are not filled(*)</h4>
+		<div class = "modal-header">
+		<button type = "button" class = "close">&times;</button>
+		<h2 style = "text-align: center;" class = "modal-title">Invalid Input</h2>
+		</div>
+		<h4 style = "text-align: center;">Required details are not filled (*)</h4>
 	</div>
 </div>
 
 <div id = "invalidInput" class = "modal">
 	<div class = "modal-content">
-		<span class = "close">&times;</span>
-		<h4 style = "text-align: center;">Invalid Input</h4>
+		<div class = "modal-header">
+		<button type = "button" class = "close">&times;</button>
+		<h2 style = "text-align: center;" class = "modal-title">Invalid Input</h2>
+		</div>
+		<h4 style = "text-align: center;">Reorder Level should be numbers only</h4>
 	</div>
 </div>
 
@@ -345,7 +351,7 @@ function updateSupplies(){
 		method: "POST",
 		parameters: {
 			action: action,
-			supplyID: updateID,
+			supplyId: updateID,
 			typeName: $F("selSupplyType"),
 			itemName: $F("txtItemName"),
 			itemUnit: $F("txtItemUnit"),

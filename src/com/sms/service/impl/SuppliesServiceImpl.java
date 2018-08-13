@@ -50,7 +50,10 @@ public class SuppliesServiceImpl implements SuppliesService{
 		Map<String, Object> supplies = new HashMap<>();
 		HttpSession session = request.getSession();
 		
-		supplies.put("supplyID", Integer.parseInt(request.getParameter("supplyID")));
+		if(session.getAttribute("username") == null){
+			session.setAttribute("username", "--");
+		}
+		supplies.put("supplyId", request.getParameter("supplyId"));
 		supplies.put("typeName", request.getParameter("typeName"));
 		supplies.put("itemName", request.getParameter("itemName"));
 		supplies.put("itemUnit", request.getParameter("itemUnit"));

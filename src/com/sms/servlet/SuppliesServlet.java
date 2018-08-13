@@ -25,8 +25,6 @@ public class SuppliesServlet extends HttpServlet {
 	throws IOException, ServletException{
 		String page = "";
 		try{
-			HttpSession session = request.getSession();
-			
 			@SuppressWarnings("resource")
 			ApplicationContext applicationContext = 
 					new ClassPathXmlApplicationContext("/com/sms/resource/applicationContext.xml");
@@ -68,7 +66,7 @@ public class SuppliesServlet extends HttpServlet {
 			page = "/pages/suppliesmaintenance.jsp";
 		}
 		catch(SQLException e){
-			
+			e.printStackTrace();
 		}
 		finally{
 			RequestDispatcher rd = request.getRequestDispatcher(page);

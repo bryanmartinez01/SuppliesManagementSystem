@@ -3,7 +3,7 @@ package com.sms.entity;
 import java.sql.Date;
 
 public class SupplyTypes {
-	private int supplyTypeID;
+	private Integer supplyTypeID;
 	private String typeName;
 	private String entryDate;
 	private String lastUser;

@@ -6,7 +6,7 @@
 	<typeAlias alias = "SupplyTypesClass" type = "com.sms.entity.SupplyTypes"/>
 	
 	<resultMap id = "getSuppliesMap"  class = "SuppliesClass">
-		<result column = "Supply ID"	property = "supplyID"/>
+		<result column = "Supply Id"	property = "supplyId"/>
 		<result column = "Type Name"	property = "typeName"/>
 		<result column = "Item Name"	property = "itemName"/>
 		<result column = "Item Unit"	property = "itemUnit"/>
@@ -25,7 +25,7 @@
 	</resultMap>
 	
 	<select id = "getSupplies" resultMap = "getSuppliesMap">
-	SELECT supply_id "Supply ID", stg.type_name "Type Name",
+	SELECT supply_id "Supply Id", stg.type_name "Type Name",
 	item_name "Item Name", item_unit "Item Unit", obsolete_tag "Obsolete Tag", location "Location",
 	reorder_level "Reorder Level", actual_count "Actual Count", remarks "Remarks", date_added "Date Added", 
 	sg.last_user "Last User", sg.last_update "Last Update"
@@ -35,7 +35,7 @@
 	</select>
 	
 	<select id = "searchSupplies" parameterClass = "java.lang.String" resultMap = "getSuppliesMap">
-	SELECT supply_id "Supply ID", stg.type_name "Type Name",
+	SELECT supply_id "Supply Id", stg.type_name "Type Name",
 	item_name "Item Name", item_unit "Item Unit", obsolete_tag "Obsolete Tag", location "Location",
 	reorder_level "Reorder Level", actual_count "Actual Count", remarks "Remarks", date_added "Date Added", 
 	sg.last_user "Last User", sg.last_update "Last Update"
@@ -72,6 +72,6 @@
 		last_user = #lastUser#,
 		last_update = SYSDATE
 		WHERE 
-		supply_id = #supplyID#
+		supply_id = #supplyId#
 	</insert>
 </sqlMap>

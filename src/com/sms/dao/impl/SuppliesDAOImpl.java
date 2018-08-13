@@ -30,7 +30,7 @@ public class SuppliesDAOImpl implements SuppliesDAO{
 			supplyTypesList = this.getSqlMapClient().queryForList("getSupplyTypes");
 		}
 		catch(SQLException e){
-			
+			e.printStackTrace();
 		}
 		return supplyTypesList;
 	}
@@ -42,7 +42,6 @@ public class SuppliesDAOImpl implements SuppliesDAO{
 			suppliesList = this.getSqlMapClient().queryForList("getSupplies");
 		}
 		catch(SQLException e){
-			//Change Code
 			e.printStackTrace();
 		}
 		return suppliesList;
@@ -95,7 +94,6 @@ public class SuppliesDAOImpl implements SuppliesDAO{
 			suppliesList = this.getSqlMapClient().queryForList("searchSupplies", itemName);
 		}
 		catch(SQLException e){
-			//Change Code
 			e.printStackTrace();
 		}
 		return suppliesList;
