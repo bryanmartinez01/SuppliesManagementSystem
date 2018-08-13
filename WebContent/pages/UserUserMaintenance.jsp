@@ -2,25 +2,23 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>User Maintenance - User</title>
 <link rel="stylesheet" href="css/style.css" type="text/css">
 <script src="js/prototype.js"></script>
-<script>
-	var contextPath = "${pageContext.request.contextPath}"
-</script>
+<jsp:include page="header.jsp" />
 </head>
-<body>
+<body>	
 	<div id="userMainContents">
 	<div id="usrDetails">
 	<h3>&nbsp;&nbsp;&nbsp;User Maintenance - User</h3>
 		<table>
 			<tr>
 				<td><label>User ID: </label></td>
-				<td><input type="text" id="txtUserId" value="${currentUserId}"></td>
+				<td><input type="text" id="txtUserId" value="${currentUserId}" disabled="disabled"></td>
 				<td><a href='#' id='changePwBtn'>Change Password</a></td>
 			</tr>
 			<tr>
@@ -50,7 +48,7 @@
 		</div>
 	</div>
 </body>
-
+<jsp:include page="footer.jsp" />
 <script>
 	var id = 0;
 	var currentRow = -1;

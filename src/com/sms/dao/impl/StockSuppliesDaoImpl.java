@@ -46,9 +46,10 @@ public class StockSuppliesDaoImpl implements StockSuppliesDao {
 			this.sqlMapClient.getCurrentConnection().setAutoCommit(false);
 			this.sqlMapClient.startBatch();
 
-			this.getSqlMapClient().update("insertSupplies", supplies);
+			this.getSqlMapClient().update("insertIssueSupplies", supplies);
 
 			this.sqlMapClient.executeBatch();
+			this.sqlMapClient.getCurrentConnection().commit();
 
 		} catch (SQLException e) {
 			System.out.println(e.getLocalizedMessage());
@@ -65,9 +66,9 @@ public class StockSuppliesDaoImpl implements StockSuppliesDao {
 			this.sqlMapClient.startTransaction();
 			this.sqlMapClient.getCurrentConnection().setAutoCommit(false);
 			this.sqlMapClient.startBatch();
-		
-			this.getSqlMapClient().update("updatedSupplies", supplies);
+			this.getSqlMapClient().update("updatedIssueSupplies", supplies);
 			this.sqlMapClient.executeBatch();
+			this.sqlMapClient.getCurrentConnection().commit();
 
 		} catch (SQLException e) {
 			System.out.println(e.getLocalizedMessage());
@@ -83,7 +84,7 @@ public class StockSuppliesDaoImpl implements StockSuppliesDao {
 		List<Departments> Departments = new ArrayList<>();
 		try {
 
-			Departments = this.getSqlMapClient().queryForList("selectDepartments");
+			Departments = this.getSqlMapClient().queryForList("selectIssueDepartments");
 
 		} catch (SQLException e) {
 			System.out.println(e.getLocalizedMessage());
@@ -96,8 +97,8 @@ public class StockSuppliesDaoImpl implements StockSuppliesDao {
 	public List<ItemNames> getItemName() throws SQLException {
 		List<ItemNames> Items = new ArrayList<>();
 		try {
-
-			Items = this.getSqlMapClient().queryForList("selectItems");
+			
+			Items = this.getSqlMapClient().queryForList("selectIssueItems");
 
 		} catch (SQLException e) {
 			System.out.println(e.getLocalizedMessage());
@@ -110,7 +111,7 @@ public class StockSuppliesDaoImpl implements StockSuppliesDao {
 	public List<Supplies> getSupplies() throws SQLException {
 		List<Supplies> supplies = new ArrayList<>();
 		try {
-			supplies = this.getSqlMapClient().queryForList("selectSupplies");
+			supplies = this.getSqlMapClient().queryForList("selectIssueSupplies");
 
 		} catch (SQLException e) {
 			System.out.println(e.getLocalizedMessage());
@@ -125,7 +126,7 @@ public class StockSuppliesDaoImpl implements StockSuppliesDao {
 		List<TableView> searchList = new ArrayList<>();
 		String search =request.getParameter("searchFor");
 		try {
-			searchList = this.getSqlMapClient().queryForList("getSearched", search);
+			searchList = this.getSqlMapClient().queryForList("getIssueSearched", search);
 			
 		
 		} catch (SQLException e) {
@@ -133,4 +134,5 @@ public class StockSuppliesDaoImpl implements StockSuppliesDao {
 		}
 		return searchList;
 	}
+	
 }

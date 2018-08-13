@@ -49,7 +49,7 @@ public class StockSuppliesServiceImpl implements StockSuppliesService {
 	}
 
 	@Override
-	public boolean insertSupplies(HttpServletRequest request) throws SQLException {
+	public void insertSupplies(HttpServletRequest request) throws SQLException {
 		HttpSession session = request.getSession();
 		Integer go = 0;
 		String itemName = request.getParameter("itemName");
@@ -97,7 +97,6 @@ public class StockSuppliesServiceImpl implements StockSuppliesService {
 			}
 
 			this.suppliesDao.insertSupplies(supplies);
-			return true;
 		} else {
 			
 
@@ -107,8 +106,6 @@ public class StockSuppliesServiceImpl implements StockSuppliesService {
 					break;
 				}
 			}
-			
-			return false;
 		}
 	}
 

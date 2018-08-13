@@ -112,4 +112,14 @@
   	</servlet-mapping>
   	<!-- END CUTE  -->
   
+  <servlet>
+		<servlet-name>suppliesmaintenance</servlet-name>
+		<servlet-class>com.sms.servlet.SuppliesServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>suppliesmaintenance</servlet-name>
+		<url-pattern>/suppliesmaintenance</url-pattern>
+	</servlet-mapping>
+  
 </web-app>

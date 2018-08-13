@@ -2,27 +2,29 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Change Password</title>
 <link rel="stylesheet" href="css/style.css" type="text/css">
 <link rel="stylesheet" href="Bootstrap-3.3.7/css/bootstrap.min.css" type="text/css">
-<script src="js/prototype.js"></script>
+<script src="./js/prototype.js"></script>
+<script>var contextPath = "${pageContext.request.contextPath}";</script>
 <script src="Bootstrap-3.3.7/js/bootstrap.js"></script>
-<script>
-	var contextPath = "${pageContext.request.contextPath}"
-</script>
-				<c:if test="${currentAccessLevel == 'U'}">
-					<c:set var="uid" value="${currentUserId}"/>
-					<c:set var="page" value="pages/UserUserMaintenance.jsp"/>
-				</c:if>	
-					
-				<c:if test="${currentAccessLevel == 'A'}">
-					<c:set var="uid" value="${changePassUserId}"/>
-					<c:set var="page" value="userMaintenance"/>
-				</c:if>
+		<c:if test="${currentAccessLevel == 'U'}">
+			<c:set var="uid" value="${currentUserId}"/>
+			<c:set var="page" value="userMaintenance"/>
+			<!-- <script>
+				$('maintenance').hide();
+				$('reports').hide();
+			</script> -->
+		</c:if>	
+				
+		<c:if test="${currentAccessLevel == 'A'}">
+			<c:set var="uid" value="${changePassUserId}"/>
+			<c:set var="page" value="userMaintenance"/>
+		</c:if>
 </head>
 <body>
 	<div id="mainContents">
@@ -56,12 +58,11 @@
 			<tr>
 				<td>&nbsp;</td>
 				<td><input type="button" id="updatePassBtn" value="Save">
-				<a href="${page}">Cancel</a></td>
+				<a id="cancelBtn" href="#">Cancel</a></td>
 			</tr>
 		</table>
 	</div>
 </body>
-
 <script>
 
 	$("txtNewPass").observe(
@@ -90,6 +91,10 @@
 		} else {
 			$("warning").addClassName("hidden");
 		}
+	});
+	
+	$("cancelBtn").observe("click", function() {
+		window.location.assign(contextPath + "/userMaintenance");
 	});
 
 	$("updatePassBtn").observe("click", function() {

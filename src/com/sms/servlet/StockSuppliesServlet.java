@@ -50,10 +50,10 @@ public class StockSuppliesServlet extends HttpServlet {
 		StockSuppliesService stocksSupplies = (StockSuppliesService) applicationContext.getBean("StockSuppliesService");
 		String page = "/pages/stockSupplies.jsp";
 		String action = request.getParameter("action") == null ? "" : request.getParameter("action");
-		boolean bool = true;
+		//boolean bool = true;
 		try {
 			if ("insertRecord".equals(action)) {
-				bool = stocksSupplies.insertSupplies(request);
+				stocksSupplies.insertSupplies(request);
 				stocksSupplies.getSupplies(request);
 			} else if ("updateRecord".equals(action)) {
 				stocksSupplies.updateSupplies(request);

@@ -2,17 +2,14 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>User Maintenance - Admin</title>
 <link rel="stylesheet" href="css/style.css" type="text/css">
-
-<script src="./js/prototype.js"></script>
-<script>
-	var contextPath = "${pageContext.request.contextPath}"
-</script>
+<script src="js/prototype.js"></script>
+<jsp:include page="header.jsp" />
 </head>
 <body>
 
@@ -116,7 +113,7 @@
 			<!-- End of Results Table -->
 	</div>
 </body>
-
+<jsp:include page="footer.jsp" />
 <script>
 	$("lastUserTxt").value = "Admin"
 	var id = 0;
@@ -175,8 +172,10 @@
 
 	$$(".updateUser").each(function(r) {
 		var userId = r.readAttribute("id")
+		$('txtUserId').writeAttribute('disabled', 'disabled');
 		$(userId).observe("click", function() {
 			var activeTxtString = "<input type='hidden' id='activeTagTxt'>";
+		
 			$("replWCncl").insert({
 				bottom : activeTxtString
 			});

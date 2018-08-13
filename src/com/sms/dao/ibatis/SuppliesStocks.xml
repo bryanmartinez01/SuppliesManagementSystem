@@ -3,7 +3,7 @@
 <sqlMap namespace="SuppliesStocks">
 
 	<typeAlias alias="SuppliesStocksClass" type="com.sms.entity.SuppliesStock"/>
-	<typeAlias alias="SuppliesClass" type="com.sms.entity.Supply"/>
+	<!-- <typeAlias alias="SuppliesClass" type="com.sms.entity.Supply"/> -->
 	
 	<resultMap id="getSuppliesStocksMap" class="SuppliesStocksClass">
 		<result column="stock_id" property="stockId"/>
@@ -17,7 +17,7 @@
 		<result column="last_update" property="lastUpdate"/>
 	</resultMap>
 	
-	<resultMap id="getSuppliesItemMap" class="SuppliesClass">
+	<resultMap id="getSuppliesItemMap" class="com.sms.entity.Supplies">
 		<result column="supply_id" property="supplyId"/>
 		<result column="item_name" property="itemName"/>
 	</resultMap>
@@ -34,14 +34,14 @@
 		SELECT st.stock_id, st.supply_id, s.item_name, st.date_added, st.purchase_date, st.reference_no,
 			st.quantity, st.last_user, st.last_update
 		FROM supplies_stocks_group2 st, supplies_group2 s
-		WHERE st.supply_id = s.supply_id AND (st.stock_id LIKE '%' || NVL(#stockId#, st.stock_id) || '%' OR LOWER(s.item_name) LIKE LOWER('%' || NVL(#itemName#,LOWER(s.item_name))  || '%'))
+		WHERE st.supply_id = s.supply_id AND (st.stock_id LIKE '%' || NVL(#stockId#, st.stock_id) || '%' OR LOWER(s.item_name) LIKE LOWER('%' || NVL(#itemName#,s.item_name)  || '%'))
 		ORDER BY st.stock_id
 	</select>
 	
 	<select id="getSuppliesItemList" resultMap="getSuppliesItemMap">
 		SELECT supply_id, item_name 
 		FROM supplies_group2
-		WHERE obsolete_tag != 'Y'
+		WHERE UPPER(obsolete_tag) != 'Y'
 	</select>
 	
 	<insert id="insertSuppliesStocks" parameterClass="java.util.Map">
@@ -61,7 +61,7 @@
 		WHERE stock_id = #stockId#
 	</update>
 	
-	<update id="updateSupplies" parameterClass="java.util.Map">
+	<update id="updateSuppliesCount" parameterClass="java.util.Map">
 		UPDATE supplies_group2
 		SET actual_count = #quantity# + actual_count
 		WHERE supply_id = #supplyId#

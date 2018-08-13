@@ -5,20 +5,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Stocks</title>
-<script type="text/javascript" src="js/script.js"></script>
-<script type="text/javascript" src="js/prototype.js"></script>
+<script src="js/script.js"></script>
 <link rel="stylesheet" href="css/style.css" type="text/css">
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+<!-- <<script src="js/jquery.twbsPagination.min.js"></script> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 <style>
-	input[type="text"] {
+	input[type="text"], #itemName {
 		width: 200px;
 	}
 	input[type="button"] {
 		width: 100px;
 		margin: 3px;
 	}
-	.link {
+	#link {
 		color: blue;
 		text-decoration: underline;
 		cursor: pointer;
@@ -49,22 +57,22 @@
 		text-align: center;
 	}
 </style>
-
-
-</head>
-
+<script src="js/prototype.js"></script>
+<script>
+	var contextPath = "${pageContext.request.contextPath}"
+</script>
 <c:if test="${currentAccessLevel == 'U'}">
 	<script>
 		$('maintenance').hide();
 		$('reports').hide();
 	</script>
 </c:if>
-<script>var contextPath = "${pageContext.request.contextPath}";</script>
+</head>
 <body>
-<div id="mainContents">
-<%-- <jsp:include page="header.jsp" /> --%>
+<div id="mainContents" class="container-fluid">	
+<jsp:include page="header.jsp" />
 <h3>Stocks</h3>
-	<div id="container">
+	<div id="container" class="container-fluid">
 		<div id="left">
 		<table>
 			<tr>
@@ -120,7 +128,7 @@
 			</c:if>
 			<c:forEach var="stocks" items="${stocksList}">
 				<tr class="tablerow">
-					<td><a class="link"><c:out value="${stocks.stockId}"/></a></td>
+					<td><a id="link"><c:out value="${stocks.stockId}"/></a></td>
 					<td><c:out value="${stocks.itemName}"/></td>
 					<td style="display: none;"><c:out value="${stocks.supplyId}"/></td>
 					<td><c:out value="${stocks.quantity}"/></td>
@@ -133,11 +141,9 @@
 			</c:forEach>
 		</table>
 	</div>
-<%-- <jsp:include page="footer.jsp" /> --%>
-
+	<jsp:include page="footer.jsp" />
 </div>
 </body>
-
 <script>
 	$("addBtn").observe("click", function() {
 		action = "AddRecord";
@@ -207,6 +213,10 @@ var flag = false;
 				$("txtPurchaseDate").value = param.down('td', 6).innerHTML;
 			}
 		});
+	});
+	
+	$("addStockNav").observe("click", function() {
+		window.location.reload();
 	});
 	
 </script>

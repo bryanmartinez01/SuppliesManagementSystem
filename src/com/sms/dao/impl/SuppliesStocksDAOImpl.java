@@ -7,8 +7,8 @@ import java.util.Map;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.sms.dao.SuppliesStocksDAO;
+import com.sms.entity.Supplies;
 import com.sms.entity.SuppliesStock;
-import com.sms.entity.Supply;
 
 public class SuppliesStocksDAOImpl implements SuppliesStocksDAO{
 
@@ -37,8 +37,8 @@ public class SuppliesStocksDAOImpl implements SuppliesStocksDAO{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Supply> getSuppliesItemList() throws SQLException {
-		List<Supply> itemList = new ArrayList<>();
+	public List<Supplies> getSuppliesItemList() throws SQLException {
+		List<Supplies> itemList = new ArrayList<>();
 		
 		try {
 			itemList = this.getSqlMapClient().queryForList("getSuppliesItemList");
@@ -95,7 +95,7 @@ public class SuppliesStocksDAOImpl implements SuppliesStocksDAO{
 			this.sqlMapClient.getCurrentConnection().setAutoCommit(false);
 			this.sqlMapClient.startBatch();
 			
-			this.getSqlMapClient().update("updateSupplies", params);
+			this.getSqlMapClient().update("updateSuppliesCount", params);
 			
 			this.sqlMapClient.executeBatch();
 			this.sqlMapClient.getCurrentConnection().commit();
