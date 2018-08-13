@@ -23,7 +23,7 @@ public class StockController extends HttpServlet {
 	private static final long serialVersionUID = -3254083445269926470L;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		String page = "pages/supplies_stocks.jsp";
+		String page = "pages/suppliesStocks.jsp";
 		try{
 			ApplicationContext applicationContext = 
 					new ClassPathXmlApplicationContext("/com/sms/resource/applicationContext.xml");
@@ -49,12 +49,12 @@ public class StockController extends HttpServlet {
 		SuppliesStocksService suppliesStocksService = 
 				(SuppliesStocksService) applicationContext.getBean("suppliesStocksService");
 		
-		String page = "pages/supplies_stocks.jsp";
+		String page = "pages/suppliesStocks.jsp";
 		String action = request.getParameter("action") == null ? "" : request.getParameter("action");
 
 		try{
 			if("insertRecord".equals(action)){
-				page = "pages/supplies_stocks_add.jsp";
+				page = "pages/addSuppliesStock.jsp";
 				suppliesStocksService.insertSuppliesStocks(request);
 			}else if("updateRecord".equals(action)){
 				suppliesStocksService.updateSuppliesStocks(request);
@@ -62,7 +62,7 @@ public class StockController extends HttpServlet {
 				suppliesStocksService.getSuppliesItemList(request);
 				suppliesStocksService.searchSuppliesStocks(request);
 			}else if("displayNextPage".equals(action)) {
-				page = "pages/supplies_stocks_add.jsp";
+				page = "pages/addSuppliesStock.jsp";
 				suppliesStocksService.getSuppliesItemList(request);
 				suppliesStocksService.getSuppliesStocks(request);
 				suppliesStocksService.getSuppliesStockItem(request);
